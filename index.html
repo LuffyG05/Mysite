@@ -81,12 +81,6 @@
             font-size: 1.5em;
             color: #333;
         }
-        .response-message {
-            display: none;
-            margin-top: 20px;
-            font-size: 1.5em;
-            color: #d63384;
-        }
     </style>
 </head>
 <body>
@@ -97,39 +91,36 @@
         <p class="message">"Every moment with you is special. Happy anniversary, my love!"</p>
         
         <div class="gallery">
-    <img src="https://raw.githubusercontent.com/LuffyG05/Mysite/main/1000049608.jpg" alt="Memory 1">
-    <img src="https://raw.githubusercontent.com/LuffyG05/Mysite/main/IMG_0994.jpg" alt="Memory 2">
-    <img src="https://raw.githubusercontent.com/LuffyG05/Mysite/main/IMG_1269.JPG" alt="Memory 3">
-</div>
+            <img src="https://raw.githubusercontent.com/LuffyG05/Mysite/main/1000049608.jpg" alt="Memory 1">
+            <img src="https://raw.githubusercontent.com/LuffyG05/Mysite/main/IMG_0994.jpg" alt="Memory 2">
+            <img src="https://raw.githubusercontent.com/LuffyG05/Mysite/main/IMG_1269.JPG" alt="Memory 3">
+        </div>
 
-<div class="video-container">
-    <video width="320" height="240" controls>
-        <source src="https://raw.githubusercontent.com/LuffyG05/Mysite/main/1739071509545219.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-</div>
+        <div class="video-container">
+            <video width="320" height="240" controls>
+                <source src="https://raw.githubusercontent.com/LuffyG05/Mysite/main/1739071509545219.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
 
-        
         <button class="button" onclick="showResponse()">Click here 🫠</button>
         
         <div id="response" class="response-box">
             <p>Please select a date for IBIS:</p>
             <input type="date" id="ibis-date" min="2025-03-01" max="2025-03-31" onchange="showSelectedDate()">
         </div>
-        
-        <p id="response-message" class="response-message"></p>
-        
+
         <p class="footer">Forever yours ❤️</p>
     </div>
     <script>
         function showResponse() {
             document.getElementById("response").style.display = "block";
         }
+
         function showSelectedDate() {
             let selectedDate = document.getElementById("ibis-date").value;
             if (selectedDate) {
-                document.getElementById("response-message").innerText = "You selected: " + selectedDate;
-                document.getElementById("response-message").style.display = "block";
+                console.log("Selected Date: " + selectedDate); // Logs the selected date in the console only
             }
         }
     </script>
