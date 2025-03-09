@@ -31,7 +31,7 @@
         </div>
 
         <div class="video-container">
-            <video width="320" height="240" controls>
+            <video width="320" height="240" controls muted>
                 <source src="https://drive.google.com/uc?export=download&id=1ZJgC9ihD8kWt48Gfkyg6CFXAakvBGrkS" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -47,44 +47,39 @@
         <p class="footer">Forever yours ❤️</p>
     </div>
 
-    <!-- Ensure functions are in the global scope -->
+    <!-- Global JavaScript -->
     <script>
         function showResponse() {
             document.getElementById("response").style.display = "block";
         }
+
+        function saveSelectedDate() {
+            let selectedDate = document.getElementById("ibis-date").value;
+            if (selectedDate) {
+                const database = window.database;
+                set(ref(database, "selectedDate"), {
+                    date: selectedDate
+                }).then(() => console.log("Date saved:", selectedDate))
+                  .catch(error => console.error("Error saving date:", error));
+            }
+        }
+
+        window.saveSelectedDate = saveSelectedDate;
     </script>
 
-    <!-- Firebase & JavaScript -->
+    <!-- Firebase -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
         const firebaseConfig = {
-            apiKey: "AIzaSyCj8F3qHWUSL3tmLS945tHkOSFJnpRkGlI",
-            authDomain: "apps-f4aae.firebaseapp.com",
-            projectId: "apps-f4aae",
-            storageBucket: "apps-f4aae.appspot.com",
-            messagingSenderId: "710315506427",
-            appId: "1:710315506427:web:3cee5897e7aba83bdc0e5e"
+            databaseURL: "https://apps-f4aae-default-rtdb.firebaseio.com/",
         };
 
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
 
-        function saveSelectedDate() {
-            let selectedDate = document.getElementById("ibis-date").value;
-            if (selectedDate) {
-                set(ref(database, "selectedDate"), { date: selectedDate })
-                    .then(() => console.log("Date saved:", selectedDate))
-                    .catch(error => console.error("Error saving date:", error));
-            }
-        }
-
-        onValue(ref(database, "selectedDate"), (snapshot) => {
-            if (snapshot.exists()) {
-                console.log("User Selected Date:", snapshot.val().date);
-            }
-        });
+        window.database = database;
     </script>
 </body>
 </html>
