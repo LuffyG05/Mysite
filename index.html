@@ -31,8 +31,9 @@
             <img src="https://raw.githubusercontent.com/LuffyG05/Mysite/main/IMG_1269.JPG" alt="Memory 3">
         </div>
 
+        <!-- ✅ Fixed Google Drive video embed -->
         <div class="video-container">
-            <iframe src="https://drive.google.com/file/d/1ZJgC9ihD8kWt48Gfkyg6CFXAakvBGrkS/preview" width="320" height="240" allow="autoplay"></iframe>
+            <iframe width="320" height="240" src="https://drive.google.com/file/d/1ZJgC9ihD8kWt48Gfkyg6CFXAakvBGrkS/preview" allow="autoplay"></iframe>
         </div>
 
         <button class="button" onclick="showResponse()">Click here 🫠</button>
@@ -46,10 +47,77 @@
         <p class="footer">Forever yours ❤️</p>
     </div>
 
+    <!-- ✅ JavaScript for Date Selection -->
     <script>
         function showResponse() {
             document.getElementById("response").style.display = "block";
         }
+
+        function saveSelectedDate() {
+            let selectedDate = document.getElementById("ibis-date").value;
+            if (selectedDate) {
+                window.saveDate(selectedDate)
+                    .then(() => {
+                        console.log("✅ Date saved:", selectedDate);
+                        document.getElementById("saved-date").innerHTML = `Previously Selected Date: <span>${selectedDate}</span>`;
+                    })
+                    .catch(error => console.error("❌ Error saving date:", error));
+            }
+        }
+
+        function loadPreviousDate() {
+            window.getDate()
+                .then(snapshot => {
+                    if (snapshot.exists()) {
+                        let savedDate = snapshot.val().date;
+                        document.getElementById("saved-date").innerHTML = `Previously Selected Date: <span>${savedDate}</span>`;
+                    } else {
+                        console.log("ℹ️ No saved date found.");
+                    }
+                })
+                .catch(error => console.error("❌ Firebase read error:", error));
+        }
+
+        document.getElementById("ibis-date").addEventListener("change", saveSelectedDate);
+        window.onload = loadPreviousDate;
+    </script>
+
+    <!-- ✅ Firebase SDK (Complete Configuration) -->
+    <!-- ✅ Firebase SDK (Updated with Your Config) -->
+    <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+    // ✅ Your Firebase Configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyCj8F3qHWUSL3tmLS945tHkOSFJnpRkGlI",
+        authDomain: "apps-f4aae.firebaseapp.com",
+        databaseURL: "https://apps-f4aae-default-rtdb.firebaseio.com",
+        projectId: "apps-f4aae",
+        storageBucket: "apps-f4aae.appspot.com",  // ❌ Fixed incorrect storageBucket URL
+        messagingSenderId: "710315506427",
+        appId: "1:710315506427:web:3cee5897e7aba83bdc0e5e"
+     };
+
+    // ✅ Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+    // ✅ Make Firebase functions globally accessible
+    window.database = database;
+    window.saveDate = (date) => set(ref(database, "selectedDate"), { date });
+    window.getDate = () => get(ref(database, "selectedDate"));
+</script>
+
+
+        // ✅ Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        // ✅ Make Firebase functions globally accessible
+        window.database = database;
+        window.saveDate = (date) => set(ref(database, "selectedDate"), { date });
+        window.getDate = () => get(ref(database, "selectedDate"));
     </script>
 </body>
 </html>
