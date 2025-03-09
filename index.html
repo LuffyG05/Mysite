@@ -81,6 +81,11 @@
             font-size: 1.5em;
             color: #333;
         }
+        .response-message {
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: #d63384;
+        }
     </style>
 </head>
 <body>
@@ -98,7 +103,7 @@
 
         <div class="video-container">
             <video width="320" height="240" controls>
-                <source src="https://raw.githubusercontent.com/LuffyG05/Mysite/main/1739071509545219.mp4" type="video/mp4">
+                <source src="https://drive.google.com/file/d/1ZJgC9ihD8kWt48Gfkyg6CFXAakvBGrkS/view?usp=drive_link" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
@@ -109,20 +114,56 @@
             <p>Please select a date for IBIS:</p>
             <input type="date" id="ibis-date" min="2025-03-01" max="2025-03-31" onchange="showSelectedDate()">
         </div>
-
+        
+        <p id="response-message" class="response-message"></p>
+        
         <p class="footer">Forever yours ❤️</p>
     </div>
-    <script>
+
+    <!-- Firebase & JavaScript -->
+    <script type="module">
+       // Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCj8F3qHWUSL3tmLS945tHkOSFJnpRkGlI",
+  authDomain: "apps-f4aae.firebaseapp.com",
+  projectId: "apps-f4aae",
+  storageBucket: "apps-f4aae.firebasestorage.app",
+  messagingSenderId: "710315506427",
+  appId: "1:710315506427:web:3cee5897e7aba83bdc0e5e"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+        // Show the date selection box
         function showResponse() {
             document.getElementById("response").style.display = "block";
         }
 
+        // Save the selected date to Firebase
         function showSelectedDate() {
             let selectedDate = document.getElementById("ibis-date").value;
             if (selectedDate) {
-                console.log("Selected Date: " + selectedDate); // Logs the selected date in the console only
+                set(ref(database, "selectedDate"), {
+                    date: selectedDate
+                });
+                console.log("Date sent to Firebase: " + selectedDate);
             }
         }
+
+        // Fetch and display the selected date in the console (for your laptop)
+        const dateRef = ref(database, "selectedDate");
+        onValue(dateRef, (snapshot) => {
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+                console.log("User Selected Date: " + data.date);
+            }
+        });
     </script>
 </body>
 </html>
