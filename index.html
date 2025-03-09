@@ -33,7 +33,7 @@
 
         <!-- ✅ Fixed Google Drive video embed -->
         <div class="video-container">
-            <iframe width="320" height="240" src="https://drive.google.com/file/d/1ZJgC9ihD8kWt48Gfkyg6CFXAakvBGrkS/preview" allow="autoplay"></iframe>
+            <iframe width="320" height="240" src="https://drive.google.com/uc?export=download&id=1ZJgC9ihD8kWt48Gfkyg6CFXAakvBGrkS" allow="autoplay"></iframe>
         </div>
 
         <button class="button" onclick="showResponse()">Click here 🫠</button>
@@ -108,16 +108,6 @@
     window.saveDate = (date) => set(ref(database, "selectedDate"), { date });
     window.getDate = () => get(ref(database, "selectedDate"));
 </script>
-
-
-        // ✅ Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
-
-        // ✅ Make Firebase functions globally accessible
-        window.database = database;
-        window.saveDate = (date) => set(ref(database, "selectedDate"), { date });
-        window.getDate = () => get(ref(database, "selectedDate"));
-    </script>
+</script>
 </body>
 </html>
