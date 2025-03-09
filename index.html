@@ -32,10 +32,7 @@
         </div>
 
         <div class="video-container">
-    <video width="320" height="240" controls muted>
-        <source src="https://drive.google.com/uc?export=download&id=1ZJgC9ihD8kWt48Gfkyg6CFXAakvBGrkS" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+            <iframe src="https://drive.google.com/file/d/1ZJgC9ihD8kWt48Gfkyg6CFXAakvBGrkS/preview" width="320" height="240" allow="autoplay"></iframe>
         </div>
 
         <button class="button" onclick="showResponse()">Click here 🫠</button>
@@ -49,60 +46,10 @@
         <p class="footer">Forever yours ❤️</p>
     </div>
 
-    <!-- JavaScript for UI and Firebase -->
     <script>
         function showResponse() {
             document.getElementById("response").style.display = "block";
         }
-
-        function saveSelectedDate() {
-            let selectedDate = document.getElementById("ibis-date").value;
-            if (selectedDate) {
-                set(ref(window.database, "selectedDate"), {
-                    date: selectedDate
-                }).then(() => {
-                    console.log("✅ Date saved:", selectedDate);
-                    document.getElementById("saved-date").innerHTML = `Previously Selected Date: <span>${selectedDate}</span>`;
-                }).catch(error => console.error("❌ Error saving date:", error));
-            }
-        }
-
-        function loadPreviousDate() {
-            get(ref(window.database, "selectedDate"))
-            .then(snapshot => {
-                if (snapshot.exists()) {
-                    let savedDate = snapshot.val().date;
-                    document.getElementById("saved-date").innerHTML = `Previously Selected Date: <span>${savedDate}</span>`;
-                } else {
-                    console.log("ℹ️ No saved date found.");
-                }
-            })
-            .catch(error => console.error("❌ Firebase read error:", error));
-        }
-
-        document.getElementById("ibis-date").addEventListener("change", saveSelectedDate);
-        window.onload = loadPreviousDate;
     </script>
-
-    <!-- Firebase Integration -->
-   <!-- Firebase Integration (Updated) -->
-   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-
-    // Initialize Firebase
-    const firebaseConfig = {
-        databaseURL: "https://apps-f4aae-default-rtdb.firebaseio.com/",
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const database = getDatabase(app);
-
-    // Make Firebase functions available globally
-    window.database = database;
-    window.set = set;
-    window.get = get;
-    window.ref = ref;
-   </script>
 </body>
 </html>
