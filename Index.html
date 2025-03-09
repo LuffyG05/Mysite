@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Anniversary</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: #ffebf0;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            padding: 20px;
+        }
+        h1 {
+            color: #d63384;
+            font-size: 3em;
+        }
+        .date {
+            font-size: 1.5em;
+            color: #333;
+            margin-top: 10px;
+        }
+        .heart {
+            color: red;
+            font-size: 2em;
+            animation: heartbeat 1s infinite alternate;
+        }
+        @keyframes heartbeat {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.2);
+            }
+        }
+        .penguin {
+            width: 200px;
+            margin-top: 20px;
+        }
+        .message {
+            font-size: 1.5em;
+            color: #333;
+            margin-top: 20px;
+        }
+        .gallery {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .gallery img {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        .video-container {
+            margin-top: 20px;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 1.2em;
+            color: #d63384;
+        }
+        .button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: white;
+            background-color: #d63384;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .response-box {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: #333;
+        }
+        .response-message {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: #d63384;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Happy Anniversary <span class="heart">❤️</span></h1>
+        <p class="date">09/03/2025</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Adelie_Penguin.jpg" alt="Cute Penguin" class="penguin">
+        <p class="message">"Every moment with you is special. Happy anniversary, my love!"</p>
+        
+        <div class="gallery">
+            <img src="https://via.placeholder.com/150" alt="Memory 1">
+            <img src="https://via.placeholder.com/150" alt="Memory 2">
+            <img src="https://via.placeholder.com/150" alt="Memory 3">
+        </div>
+        
+        <div class="video-container">
+            <video width="320" height="240" controls>
+                <source src="your-video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        
+        <button class="button" onclick="showResponse()">Click here 🫠</button>
+        
+        <div id="response" class="response-box">
+            <p>Please select a date for IBIS:</p>
+            <input type="date" id="ibis-date" min="2025-03-01" max="2025-03-31" onchange="showSelectedDate()">
+        </div>
+        
+        <p id="response-message" class="response-message"></p>
+        
+        <p class="footer">Forever yours ❤️</p>
+    </div>
+    <script>
+        function showResponse() {
+            document.getElementById("response").style.display = "block";
+        }
+        function showSelectedDate() {
+            let selectedDate = document.getElementById("ibis-date").value;
+            if (selectedDate) {
+                document.getElementById("response-message").innerText = "You selected: " + selectedDate;
+                document.getElementById("response-message").style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
