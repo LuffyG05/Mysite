@@ -3,16 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Firebase Date Picker</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Happy Anniversary</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h2>Select a Date</h2>
-        <input type="date" id="ibis-date">
-        <p id="saved-date">Previously Selected Date: <span>None</span></p>
+        <h1>Happy Anniversary <span class="heart">❤️</span></h1>
+        <p class="date">09/03/2025</p>
+        <p class="message">"Every moment with you is special. Happy anniversary, my love!"</p>
+
+        <div class="gallery">
+            <img src="https://raw.githubusercontent.com/LuffyG05/Mysite/main/1000049608.jpg" alt="Memory 1">
+            <img src="https://raw.githubusercontent.com/LuffyG05/Mysite/main/IMG_0994.jpg" alt="Memory 2">
+            <img src="https://raw.githubusercontent.com/LuffyG05/Mysite/main/IMG_1269.JPG" alt="Memory 3">
+        </div>
+
+        <div class="video-container">
+            <video width="320" height="240" controls muted>
+                <source src="https://drive.google.com/uc?export=download&id=1ZJgC9ihD8kWt48Gfkyg6CFXAakvBGrkS" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <button class="button" onclick="showResponse()">Click here 🫠</button>
+
+        <div id="response" class="response-box">
+            <p>Please select a date for IBIS:</p>
+            <input type="date" id="ibis-date" min="2025-03-01" max="2025-03-31">
+            <p id="saved-date">Previously Selected Date: <span>None</span></p>
+        </div>
+
+        <p class="footer">Forever yours ❤️</p>
     </div>
 
-    <script type="module" src="script.js"></script>
+    <!-- Scripts -->
+    <script src="firebase.js" type="module"></script>
+    <script src="script.js"></script>
 </body>
 </html>
